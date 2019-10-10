@@ -22,11 +22,13 @@ import {
   parseJsonAtPath,
 } from '../utility/util';
 
-import { addPackageJsonDependency, NodeDependencyType } from '../utility/dependencies';
+import { addPackageJsonDependency, NodeDependencyType, pkgJson } from '../utility/dependencies';
 
 import { Observable, of, concat } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { TsConfigSchema } from '../interfaces/ts-config-schema';
+
+const transformsWhitelist = ['@angular', 'rxjs'];
 
 export default function(options: JestOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -37,6 +39,7 @@ export default function(options: JestOptions): Rule {
       removeFiles(),
       addJestFiles(),
       addTestScriptsToPackageJson(),
+      checkForTransforms(),
       configureTsConfig(options),
     ])(tree, context);
   };
@@ -179,4 +182,50 @@ function configureTsConfig(options: JestOptions): Rule {
 
     return tree.overwrite(tsConfigPath, JSON.stringify(tsConfigContent, null, 2) + '\n');
   };
+}
+
+function checkForTransforms(): Rule {
+  return (tree: Tree) => {
+    const transforms = getRequiredTransforms(tree);
+
+    if (!transforms || !transforms.length) {
+      return tree;
+    }
+
+    console.log({ transforms });
+    return tree;
+  };
+}
+
+function getRequiredTransforms(tree: Tree): string[] {
+  const pJson: Record<string, any> = parseJsonAtPath(tree, pkgJson.Path);
+  const devDeps = pJson && pJson.value && pJson.value.dependencies;
+
+  if (!devDeps) {
+    return [];
+  }
+  const depMap = new Set<string>();
+
+  // visit each dependencies in the /node_modules and determine if the file needs to be transpiled
+  Object.keys(devDeps).filter((dep) => {
+    const module = tree.getDir(`node_modules/${dep}`);
+
+    module.visit((path) => {
+      const needsTransform = (path: string, dep: string) =>
+        path === `/node_modules/${dep}/index.d.ts`;
+
+      if (needsTransform(path, dep) && !depMap.has(path)) {
+        // strip of path and file info
+        const packageName = path.replace('/node_modules/', '').replace('/index.d.ts', '');
+        // get the root package dir, not concerned with sub folders
+        const rootPackage = packageName.split('/')[0];
+        // if not in the whitelist, add
+        if (!transformsWhitelist.some((t) => rootPackage.includes(t))) {
+          depMap.add(rootPackage);
+        }
+      }
+    });
+  });
+
+  return Array.from(depMap);
 }
