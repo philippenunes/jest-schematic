@@ -163,7 +163,7 @@ function configureTsConfig(options: JestOptions): Rule {
 
     let tsConfigContent: TsConfigSchema;
 
-    if (workplaceTsConfig && workplaceTsConfig.value) {
+    if (workplaceTsConfig?.value) {
       tsConfigContent = workplaceTsConfig.value;
     } else {
       return tree;
