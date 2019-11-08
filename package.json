@@ -10,7 +10,8 @@
   "bugs": "https://github.com/briebug/jest-schematic/issues",
   "homepage": "https://github.com/briebug/jest-schematic",
   "scripts": {
-    "bootstrap": "yarn"
+    "bootstrap": "yarn",
+    "lerna": "lerna"
   },
   "keywords": [],
   "author": "Briebug",
