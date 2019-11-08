@@ -1,8 +1,8 @@
 # Ignores TypeScript files, but keeps definitions.
 *.ts
 *.js.map
-!src/**/files/**/*.js
-!src/**/files/**/*.ts
+!packages/**/files/**/*.js
+!packages/**/files/**/*.ts
 !*.d.ts
 
 .vscode/*

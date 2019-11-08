@@ -1,10 +1,7 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2017", "dom"],
     "declaration": true,
     "module": "commonjs",
     "moduleResolution": "node",
@@ -20,15 +17,13 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "target": "es6",
-    "types": [
-      "jasmine",
-      "node"
-    ]
+    "types": ["jasmine", "node"]
   },
   "include": [
-    "src/**/*", "packages/schematic/jest", "packages/schematic/utility", "packages/schematic/interfaces"
+    "src/**/*",
+    "packages/schematic/jest",
+    "packages/schematic/utility",
+    "packages/schematic/interfaces"
   ],
-  "exclude": [
-    "node_modules", "my-project",  "src/*/files/**/*"
-  ]
+  "exclude": ["node_modules", "src/*/files/**/*"]
 }
