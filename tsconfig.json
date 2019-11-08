@@ -26,7 +26,7 @@
     ]
   },
   "include": [
-    "src/**/*"
+    "src/**/*", "packages/schematic/jest", "packages/schematic/utility", "packages/schematic/interfaces"
   ],
   "exclude": [
     "node_modules", "my-project",  "src/*/files/**/*"
