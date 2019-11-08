@@ -3,7 +3,7 @@
   "schematics": {
     "ng-add": {
       "description": "Adds Jest to the application",
-      "factory": "./jest/index",
+      "factory": "./jest/ng-add",
       "schema": "./jest/schema.json"
     },
     "jest": {
