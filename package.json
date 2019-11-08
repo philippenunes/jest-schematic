@@ -11,7 +11,8 @@
   "homepage": "https://github.com/briebug/jest-schematic",
   "scripts": {
     "bootstrap": "yarn",
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "test": "learn run test --stream"
   },
   "keywords": [],
   "author": "Briebug",
