@@ -9,7 +9,9 @@
   "repository": "briebug/jest-schematic",
   "bugs": "https://github.com/briebug/jest-schematic/issues",
   "homepage": "https://github.com/briebug/jest-schematic",
-  "scripts": {},
+  "scripts": {
+    "bootstrap": "yarn"
+  },
   "keywords": [],
   "author": "Briebug",
   "license": "MIT",
