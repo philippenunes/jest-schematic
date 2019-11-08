@@ -9,6 +9,8 @@ import {
   mergeWith,
 } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
+import { Observable, of, concat } from 'rxjs';
+import { map, concatMap } from 'rxjs/operators';
 
 import {
   removePackageJsonDependency,
@@ -22,11 +24,9 @@ import {
   parseJsonAtPath,
 } from '../utility/util';
 
-import { addPackageJsonDependency, NodeDependencyType } from '../utility/dependencies';
 
-import { Observable, of, concat } from 'rxjs';
-import { map, concatMap } from 'rxjs/operators';
 import { TsConfigSchema } from '../interfaces/ts-config-schema';
+import { addPackageJsonDependency, NodeDependencyType } from '../utility/dependencies';
 
 export default function(options: JestOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
