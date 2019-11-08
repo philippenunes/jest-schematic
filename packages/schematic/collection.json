@@ -3,18 +3,18 @@
   "schematics": {
     "ng-add": {
       "description": "Adds Jest to the application",
-      "factory": "./jest/ng-add",
-      "schema": "./jest/schema.json"
+      "factory": "./src/ng-add",
+      "schema": "./src/schema.json"
     },
     "jest": {
       "description": "Adds Jest to the application",
-      "factory": "./jest/index",
-      "schema": "./jest/schema.json"
+      "factory": "./src/index",
+      "schema": "./src/schema.json"
     },
     "add": {
       "description": "Adds Jest to the application",
-      "factory": "./jest/index",
-      "schema": "./jest/schema.json"
+      "factory": "./src/index",
+      "schema": "./src/schema.json"
     }
   }
 }

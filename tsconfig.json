@@ -11,7 +11,7 @@
     "noImplicitThis": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "rootDir": "src/",
+    "rootDir": "packages/",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
@@ -19,11 +19,5 @@
     "target": "es6",
     "types": ["jasmine", "node"]
   },
-  "include": [
-    "src/**/*",
-    "packages/schematic/jest",
-    "packages/schematic/utility",
-    "packages/schematic/interfaces"
-  ],
-  "exclude": ["node_modules", "src/*/files/**/*"]
+  "exclude": ["node_modules"]
 }

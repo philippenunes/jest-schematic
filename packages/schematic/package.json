@@ -5,7 +5,7 @@
   "repository": "briebug/jest-schematic",
   "bugs": "https://github.com/briebug/jest-schematic/issues",
   "homepage": "https://github.com/briebug/jest-schematic",
-  "main": "src/jest/index.js",
+  "main": "src/index.js",
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:watch": "tsc -p tsconfig.json -watch",
@@ -24,7 +24,7 @@
   ],
   "author": "Briebug",
   "license": "MIT",
-  "schematics": "./src/collection.json",
+  "schematics": "./collection.json",
   "dependencies": {},
   "publishConfig": {
     "access": "public"
