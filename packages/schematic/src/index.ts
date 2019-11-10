@@ -22,11 +22,11 @@ import {
   getLatestNodeVersion,
   NodePackage,
   parseJsonAtPath,
-} from '../utility/util';
+} from './utility/util';
 
 
 import { TsConfigSchema } from '../interfaces/ts-config-schema';
-import { addPackageJsonDependency, NodeDependencyType } from '../utility/dependencies';
+import { addPackageJsonDependency, NodeDependencyType } from './utility/dependencies';
 
 export default function(options: JestOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {

@@ -20,9 +20,9 @@ import {
     getLatestNodeVersion,
     NodePackage,
     parseJsonAtPath,
-  } from '../utility/util';
+  } from './utility/util';
 
-  import { addPackageJsonDependency, NodeDependencyType } from '../utility/dependencies';
+  import { addPackageJsonDependency, NodeDependencyType } from './utility/dependencies';
 
   import { Observable, of, concat } from 'rxjs';
   import { map, concatMap } from 'rxjs/operators';

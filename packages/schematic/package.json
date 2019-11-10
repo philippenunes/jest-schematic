@@ -7,7 +7,7 @@
   "homepage": "https://github.com/briebug/jest-schematic",
   "main": "src/index.js",
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "bash ./scripts/build.sh",
     "build:watch": "tsc -p tsconfig.json -watch",
     "clean": "git checkout HEAD -- ../../sandboxes && git clean -f -d ../../sandboxes",
     "build:clean:launch": "yarn build && yarn clean && yarn launch",

@@ -12,7 +12,7 @@
   "scripts": {
     "bootstrap": "yarn",
     "lerna": "lerna",
-    "test": "learn run test --stream"
+    "test": "lerna run test --stream"
   },
   "keywords": [],
   "author": "Briebug",
@@ -36,8 +36,7 @@
     "typescript": "^3.7.2"
   },
   "husky": {
-    "hooks": {
-    }
+    "hooks": {}
   },
   "lint-staged": {
     "*.{js,json,md,ts}": [
