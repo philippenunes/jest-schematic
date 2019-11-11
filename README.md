@@ -1,6 +1,7 @@
 # Jest Angular Schematic
 
 [![npm (scoped)](https://img.shields.io/npm/v/@briebug/jest-schematic.svg)](https://www.npmjs.com/package/@briebug/jest-schematic)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 Add [Jest](https://facebook.github.io/jest/) to an Angular CLI project
 
