@@ -204,36 +204,6 @@ export function addPropertyToPackageJson(
   tree.commitUpdate(recorder);
 }
 
-export function getWorkspaceConfig(tree: Tree, options: JestOptions) {
-  const workspace = getWorkspace(tree);
-  const workspacePath = getWorkspacePath(tree);
-  let projectName;
-  let projectProps;
-
-  if (options.__version__ >= 6) {
-    projectName = options.project || workspace.defaultProject || '';
-    projectProps = workspace.projects[projectName];
-  } else if (options.__version__ < 6) {
-    projectName = (workspace as any).project.name || '';
-    projectProps = (workspace as any).apps[0];
-  }
-
-  return { projectProps, workspacePath, workspace, projectName };
-}
-
-/**
- * Angular5 (angular-cli.json) config is formatted into an array of applications vs Angular6's (angular.json) object mapping
- * multi-app Angular5 apps are currently not supported.
- *
- * @param tree
- * @param options
- */
-export function isMultiAppV5(tree: Tree, options: JestOptions) {
-  const config = getWorkspaceConfig(tree, options);
-
-  return options.__version__ < 6 && (config.workspace as any).apps.length > 1;
-}
-
 /**
  * Attempt to retrieve the latest package version from NPM
  * Return an optional "latest" version in case of error
