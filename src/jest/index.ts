@@ -15,11 +15,9 @@ import {
   JestOptions,
   safeFileDelete,
   addPropertyToPackageJson,
-  getWorkspaceConfig,
   getAngularVersion,
   getLatestNodeVersion,
   NodePackage,
-  parseJsonAtPath,
 } from '../utility/util';
 
 import { addPackageJsonDependency, NodeDependencyType } from '../utility/dependencies';
@@ -27,6 +25,7 @@ import { addPackageJsonDependency, NodeDependencyType } from '../utility/depende
 import { Observable, of, concat } from 'rxjs';
 import { map, concatMap } from 'rxjs/operators';
 import { TsConfigSchema } from '../interfaces/ts-config-schema';
+import {getWorkspaceConfig } from '@schuchard/schematics-core';
 
 export default function(options: JestOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
@@ -66,7 +65,7 @@ function updateDependencies(): Rule {
       })
     );
 
-    const addDependencies = of('jest', '@types/jest', 'jest-preset-angular').pipe(
+    const addDependencies = of('jest', '@types/jest', '@angular-builders/jest').pipe(
       concatMap((packageName: string) => getLatestNodeVersion(packageName)),
       map((packageFromRegistry: NodePackage) => {
         const { name, version } = packageFromRegistry;
@@ -156,30 +155,33 @@ function addTestScriptsToPackageJson(): Rule {
 }
 
 function configureTsConfig(options: JestOptions): Rule {
-  return (tree: Tree) => {
-    const { projectProps } = getWorkspaceConfig(tree, options);
-    const tsConfigPath = projectProps.architect.test.options.tsConfig;
-    const workplaceTsConfig = parseJsonAtPath(tree, tsConfigPath);
+  return async (tree: Tree) => {
+    const { projectProps } = await getWorkspaceConfig(tree);
+    return;
+    // const tsConfigPath = projectProps.architect.test.options.tsConfig;
+    // const workplaceTsConfig = parseJsonAtPath(tree, tsConfigPath);
 
-    let tsConfigContent: TsConfigSchema;
+    // let tsConfigContent: TsConfigSchema;
 
-    if (workplaceTsConfig && workplaceTsConfig.value) {
-      tsConfigContent = workplaceTsConfig.value;
-    } else {
-      return tree;
-    }
+    // // if (workplaceTsConfig && workplaceTsConfig.value) {
+    // //   tsConfigContent = workplaceTsConfig.value;
+    // // } else {
+    // //   return tree;
+    // // }
 
-    tsConfigContent.compilerOptions = Object.assign(tsConfigContent.compilerOptions, {
-      module: 'commonjs',
-      emitDecoratorMetadata: true,
-      allowJs: true,
-    });
-    tsConfigContent.files = tsConfigContent.files.filter(
-      (file: String) =>
-        // remove files that match the following
-        !['test.ts', 'src/test.ts'].some((testFile) => testFile === file)
-    );
+    // tsConfigContent.compilerOptions = Object.assign(tsConfigContent.compilerOptions, {
+    //   module: 'commonjs',
+    //   emitDecoratorMetadata: true,
+    //   allowJs: true,
+    // });
+    // tsConfigContent.files = tsConfigContent.files.filter(
+    //   (file: String) =>
+    //     // remove files that match the following
+    //     !['test.ts', 'src/test.ts'].some((testFile) => testFile === file)
+    // );
 
-    return tree.overwrite(tsConfigPath, JSON.stringify(tsConfigContent, null, 2) + '\n');
+    // tree.overwrite(tsConfigPath, JSON.stringify(tsConfigContent, null, 2) + '\n');
+
+    // return of(tree);
   };
 }
